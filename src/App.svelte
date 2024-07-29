@@ -2,7 +2,16 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
+  import SvelteLogo from './SvelteLogo.svelte';
+  import Button from './Button.svelte';
+  let buttonLabel='送信';
 </script>
+
+<Button label={buttonLabel}></Button>
+
+
+<div>Svelteのロゴ画像が差し込まれる</div>
+<SvelteLogo></SvelteLogo>
 
 <main>
   <div>
