@@ -10,6 +10,7 @@
   let taro = { name: '太郎', id: 'taro', bio: 'よろしく'}
   import PropsTest from './PropsTest.svelte';
   import Box from './Box.svelte';
+  import Card from './Card.svelte';
 </script>
 
 
@@ -54,6 +55,12 @@
 <SvelteLogo></SvelteLogo>
 <!-- <Button label={buttonLabel}></Button> -->
 
+<Card>
+  <h3 slot="title">Svelteについて</h3>
+  <div slot="body">
+    <p>SvelteはこれまでにないUIフレームワークです</p>
+  </div>
+</Card>
 <style>
   .logo {
     height: 6em;
