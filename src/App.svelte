@@ -5,13 +5,10 @@
   import SvelteLogo from './SvelteLogo.svelte';
   import Button from './Button.svelte';
   let buttonLabel='送信';
+  import UserProfile from './UserProfile.svelte';
+  let taro = { name: '太郎', id: 'taro', bio: 'よろしく'}
 </script>
 
-<Button label={buttonLabel}></Button>
-
-
-<div>Svelteのロゴ画像が差し込まれる</div>
-<SvelteLogo></SvelteLogo>
 
 <main>
   <div>
@@ -36,6 +33,12 @@
     Click on the Vite and Svelte logos to learn more
   </p>
 </main>
+
+<Button label ="送信(プロパティでdisabled=true)" disabled = {true}> </Button>
+<Button label ="送信(初期値でdisabled=false)"></Button>
+<div>Svelteのロゴ画像が差し込まれる</div>
+<SvelteLogo></SvelteLogo>
+<!-- <Button label={buttonLabel}></Button> -->
 
 <style>
   .logo {
