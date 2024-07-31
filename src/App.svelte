@@ -8,6 +8,8 @@
   let props = {label: '送信', disabled: true};
   import UserProfile from './UserProfile.svelte';
   let taro = { name: '太郎', id: 'taro', bio: 'よろしく'}
+  import PropsTest from './PropsTest.svelte';
+  import Box from './Box.svelte';
 </script>
 
 
@@ -35,7 +37,18 @@
   </p>
 </main>
 
-<Button {...props}></Button> 
+<PropsTest foo="テスト" bar={42}> </PropsTest>
+
+<!-- Boxにコンテンツがある場合 -->
+<Box>
+  <h3> Svelteについて</h3>
+  <p>SvelteはこれまでにないUIフレームワークです </p>
+  <Button {...props}></Button> 
+</Box>
+
+<!-- Boxにコンテンツがない場合 ⇒Box.svelteの<em>に記載した内容が表示-->
+<Box>
+</Box>
 
 <div>Svelteのロゴ画像が差し込まれる</div>
 <SvelteLogo></SvelteLogo>
