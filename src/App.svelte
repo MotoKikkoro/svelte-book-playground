@@ -57,7 +57,7 @@
 
 <Card>
   <h3 slot="title">Svelteについて</h3>
-  <div slot="body">
+  <div>
     <p>SvelteはこれまでにないUIフレームワークです</p>
   </div>
 </Card>

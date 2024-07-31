@@ -4,7 +4,7 @@
     </div>
 
     <div class="body">
-        <slot name="body"></slot>
+        <slot></slot>
     </div>
 </div>
 
