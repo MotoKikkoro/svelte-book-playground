@@ -13,6 +13,17 @@
   import Box from './Box.svelte';
   import Card from './Card.svelte';
   import List from './List.svelte';
+  import Count from './Count.svelte';
+
+  function handleClick(){
+    alert('クリックされました');
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    alert(`検索キーワードは${formData.get('q')}です。`)
+  }
 </script>
 
 
@@ -67,6 +78,18 @@
 <List let:item={text}>
   <div class="item">{text}</div>
 </List>
+
+<Count>
+  <span slot="count" let:value={v}>{v}</span>
+</Count>
+
+<button on:click={handleClick}>ここをクリック</button>
+
+<form on:submit={handleSubmit}>
+  <input type="search" name="q">
+  <button type="submit">検索</button>
+</form>
+
 
 <style>
   .logo {
