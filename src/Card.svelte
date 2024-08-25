@@ -1,7 +1,9 @@
 <div class="card">
+    {#if $$slots.title}
     <div class="title">
         <slot name ="title"></slot>
     </div>
+    {/if}
 
     <div class="body">
         <slot></slot>

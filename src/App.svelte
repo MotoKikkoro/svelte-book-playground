@@ -1,3 +1,4 @@
+<!-- 親 -->
 <script>
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
@@ -11,6 +12,7 @@
   import PropsTest from './PropsTest.svelte';
   import Box from './Box.svelte';
   import Card from './Card.svelte';
+  import List from './List.svelte';
 </script>
 
 
@@ -61,6 +63,11 @@
     <p>SvelteはこれまでにないUIフレームワークです</p>
   </div>
 </Card>
+
+<List let:item={text}>
+  <div class="item">{text}</div>
+</List>
+
 <style>
   .logo {
     height: 6em;
@@ -76,5 +83,8 @@
   }
   .read-the-docs {
     color: #888;
+  }
+  .item{
+    color: blue;
   }
 </style>
