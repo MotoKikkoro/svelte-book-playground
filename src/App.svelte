@@ -57,6 +57,19 @@
     }
   });
 
+  import {tick} from 'svelte';
+  let clicked = false;
+  async function handleClickTiming(Click){
+    clicked = true;
+    await tick(); // DOMに状態が反映され、<canvas>要素が存在するまで待つ。
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle= '#ddd'; 
+    ctx.fillRect(0,0,100,100);
+    ctx.fillRect(100,100,200,200);
+    
+  }
+
   function handleClick(){
     // タイムラインの先頭に項目を追加
     contents = [
@@ -87,9 +100,9 @@
 
 </script>
 
+{#if clicked}
 <canvas id="canvas" width=200 height="200"></canvas>
-<!-- <canvas> の width と height は、キャンバスの全体的な描画エリアを定義\ -->
-
+{/if}
 
 <main>
   <div>
@@ -154,7 +167,7 @@
 </Count>
 
 <button on:click={handleClick}>タイムラインを更新</button>
-
+<button on:click={handleClickTiming}>表示</button>
 <form on:submit|preventDefault={handleSubmit}>
   <input type="search" name="q">
   <button type="submit">検索</button>
