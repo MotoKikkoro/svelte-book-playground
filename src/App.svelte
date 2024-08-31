@@ -26,6 +26,17 @@
     // fillRect は、描画エリア内での矩形の位置とサイズを決定
   });
 
+  import {onDestroy} from 'svelte';
+
+  let now = new Date();
+
+  const timer = setInterval(()=>{
+    now = new Date();
+  }, 1000);
+
+  onDestroy(()=>{
+    clearInterval(timer);
+  });
 
   function handleClick(){
     alert('butonをクリックしました');
@@ -123,6 +134,8 @@
 </div>
 
 <HelloButton on:hello={handleHello} />
+
+<div>現在の時刻は{now.toLocaleString()}です。</div>
 
 <style>
   .logo {
