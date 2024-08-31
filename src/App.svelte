@@ -14,9 +14,19 @@
   import Card from './Card.svelte';
   import List from './List.svelte';
   import Count from './Count.svelte';
-
   import HelloButton from './HelloButton.svelte';
- 
+
+  import {onMount} from 'svelte';
+  onMount(()=>{
+    const canvas = document.getElementById('canvas');//キャンバス要素を取得
+    const ctx = canvas.getContext('2d');//2D描画コンテキストを取得
+    ctx.fillStyle= '#ddd'; // 塗りつぶしの色
+    ctx.fillRect(0,0,100,100);
+    ctx.fillRect(100,100,200,200);
+    // fillRect は、描画エリア内での矩形の位置とサイズを決定
+  });
+
+
   function handleClick(){
     alert('butonをクリックしました');
   }
@@ -42,6 +52,8 @@
 
 </script>
 
+<canvas id="canvas" width=200 height="200"></canvas>
+<!-- <canvas> の width と height は、キャンバスの全体的な描画エリアを定義\ -->
 
 <main>
   <div>
