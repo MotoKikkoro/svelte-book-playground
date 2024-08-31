@@ -27,20 +27,44 @@
   });
 
   import {onDestroy} from 'svelte';
-
-  let now = new Date();
-
+  let now = new Date(); //現在の日時を取得して now という変数に保存しています。この変数はリアクティブで、時間が経過するとともに更新される
   const timer = setInterval(()=>{
     now = new Date();
-  }, 1000);
-
+  }, 1000); // setInterval を使って、1秒（1000ミリ秒）ごとに now 変数を更新するタイマーを設定
+  // setInterval は、指定された時間間隔で関数を繰り返し実行するJavaScriptのタイマー関数
   onDestroy(()=>{
     clearInterval(timer);
+  }); // clearInterval(timer); を実行して、タイマーを停止
+
+
+  // 投稿0~99までの配列を作成
+  let contents = Array.from({length: 100}, (_, i)=> `投稿${i}`);
+  import {beforeUpdate, afterUpdate} from 'svelte';
+  let prevHeight;
+  beforeUpdate(()=>{
+    const element = document.getElementById('timeline');
+    if (element){
+      //DOM更新直前の要素のscrollHeightを保存
+      prevHeight = element.scrollHeight;
+    }
+  });
+  afterUpdate(()=>{
+    if(prevHeight){
+      //更新後にscrollHeightが増えた分だけスクロール位置を調整
+      const element = document.getElementById('timeline');
+      const diff = element.scrollHeight - prevHeight;
+      element.scrollTop += diff;
+    }
   });
 
   function handleClick(){
-    alert('butonをクリックしました');
+    // タイムラインの先頭に項目を追加
+    contents = [
+      ...Array.from({length: 100}, (_, i) => `投稿${i-100}`),
+      ...contents,
+    ];
   }
+
 
   function handleSubmit(event) {
     const formData = new FormData(event.target);
@@ -66,6 +90,7 @@
 <canvas id="canvas" width=200 height="200"></canvas>
 <!-- <canvas> の width と height は、キャンバスの全体的な描画エリアを定義\ -->
 
+
 <main>
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -79,6 +104,12 @@
 
   <div class="card">
     <Counter />
+  </div>
+
+  <div id="timeline">
+    {#each contents as item}
+      <div>{item}</div>
+      {/each}
   </div>
 
   <p>
@@ -122,7 +153,7 @@
   <span slot="count" let:value={v}>{v}</span>
 </Count>
 
-<button on:click={handleClick}>ここをクリック</button>
+<button on:click={handleClick}>タイムラインを更新</button>
 
 <form on:submit|preventDefault={handleSubmit}>
   <input type="search" name="q">
@@ -155,5 +186,11 @@
   }
   .item{
     color: blue;
+  }
+  #timeline{
+    width: 300px;
+    height: 300px;
+    border: 1px solid gray;
+    overflow: auto;
   }
 </style>
