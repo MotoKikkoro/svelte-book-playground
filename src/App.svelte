@@ -15,15 +15,31 @@
   import List from './List.svelte';
   import Count from './Count.svelte';
 
+  import HelloButton from './HelloButton.svelte';
+ 
   function handleClick(){
-    alert('クリックされました');
+    alert('butonをクリックしました');
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
     const formData = new FormData(event.target);
     alert(`検索キーワードは${formData.get('q')}です。`)
   }
+
+  function handleDivClick(){
+    alert('divをクリックしました');
+  }
+
+  function handleButtonClick(){
+    alert('buttonをクリックしました');
+  }
+
+  function handleHello(event){
+    alert(event.detail);
+  }
+
+
+
 </script>
 
 
@@ -85,11 +101,16 @@
 
 <button on:click={handleClick}>ここをクリック</button>
 
-<form on:submit={handleSubmit}>
+<form on:submit|preventDefault={handleSubmit}>
   <input type="search" name="q">
   <button type="submit">検索</button>
 </form>
 
+<div on:click|capture|stopPropagation={handleDivClick}>
+  <button on:click={handleButtonClick}>Divクリック</button>
+</div>
+
+<HelloButton on:hello={handleHello} />
 
 <style>
   .logo {
